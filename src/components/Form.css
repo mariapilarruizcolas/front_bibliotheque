@@ -1,0 +1,56 @@
+.containerForm{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    box-shadow:rgba(0, 0, 0, 0.35) 0px 2px 5px;
+    margin:2rem;
+    padding:2rem;
+    width: 50vh;
+}
+.criteres{
+    display:flex;
+    flex-direction: row;
+    margin:0.5rem;
+}
+.header-img{
+    width: 100vw;
+    height: 30vh;
+}
+
+.containerModeEmploi{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40vh;
+}
+.textModeEmploi{
+  margin:2rem;
+  padding:2rem;
+  font-size: 14px;
+  box-shadow:rgba(0, 0, 0, 0.35) 0px 2px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  min-height: 60%;
+  font-size: clamp(8px, 9vw, 18px);
+}
+.titleModeEmploi{
+  padding: 1.5rem;
+  font-size: clamp(10px, 9vw, 30px);
+}
+button {
+  margin: 0 auto 20px;
+  background-color: none;
+  border: 2px solid;
+  padding: 4px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button.hover{
+  background-color:aqua ;
+}

@@ -1,0 +1,13 @@
+.BookCard {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin: 2rem;
+    width: 300px;
+    border: 1px solid #f8f8f8;
+    border-radius: 20px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.307);
+    background-color:beige center/cover;
+  }
+  
+  

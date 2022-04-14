@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+h1 {
+    color: red;
+    font-weight: 700;
+}
+
+.button {
+    background-color: #000000;
+    width: 60px;
+}
+ul{
+    list-style-type: none;
+    
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-self: center;
+}
+li{
+    list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  font-family: lobster;
+  color: #464e47;
+  font-size: 20px;
+}
+a:hover {
+  font-size: 22px;
+  color:blue;
+}
