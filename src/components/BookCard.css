@@ -1,13 +1,32 @@
 .BookCard {
-    display: flex;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  width: 95%;
+  border: 1px solid #f8f8f8;
+  border-radius: 20px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.307);
+  background-color: beige center/cover;
+
+}
+
+@media screen and (max-width:767px) {
+  .BookCard {
     flex-direction: column;
-    padding: 2rem;
-    margin: 2rem;
-    width: 300px;
-    border: 1px solid #f8f8f8;
-    border-radius: 20px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.307);
-    background-color:beige center/cover;
   }
-  
-  
+
+  h2 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  btn {
+    width: 20vw;
+    align-items: center;
+  }
+
+
+}

@@ -1,59 +1,63 @@
-//objectif: recuperer les criteres 
-//et les passer autant que props vers Books 
-//qui fera l'appel et le tri de la basse de données
 
-import './Form.css';
+import axios from 'axios';
+import React, { useState } from 'react';
+import NavBarSide from '../components/NavBarSide';
+import '../styles/test.css';
+import BookCard from './BookCard';
+
 
 function Form() {
-    //State Premier Critere
-    //State Second Critere
+    const [showResults, setShowResults] = useState(false);
+    const [books, setBooks] = useState([]);
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+
+    const submitSelectedBooks = (e) => {
+        setShowResults(!showResults);
+        e.preventDefault();
+        if (title.length > 3 || author.length > 3) {
+
+            axios
+                .get('http://localhost:8000/api/books/')
+                .then((res) => setBooks(res.data[0]));
+            console.log('livres ', books);
+        }
+    }
+
     return (
-        <div className ="container">
-            <div className="containerForm">
-                <h1>Recherche</h1>
-                
-                <div className="criteres">
-                    <select id="critere1" name="critere1">
-                        <option value="titre">Titre</option>
-                        <option value="auteur">Auteur</option>
-                    </select>
-                    <input class="form" type="text" id="search1" name="search1" placeholder="Recherche dans le catalogue" />
-                    {/* //onChange={((e) => setSelectedRadio(e.target.id)) */}
-                </div>
-                <div className="criteres">
-                    <select id="arguments" name="arguments">
-                        <option value="Et">Et</option>
-                        <option value="Ou">Ou</option>
-                        <option value="Sauf">Sauf</option>
-                    </select>
-                    <input class="form" type="text" id="search2" name="search2" placeholder="Recherche dans le catalogue" />
-                     {/* //onChange={((e) => setSelectedRadio(e.target.id)) */}
-                </div>
-                <div className="criteres">
-                    <button>
-                        <a class="button" href="bien_recu.html">Rechercher</a>
-                     {/* //onClick={((e) => setSelectedRadio(e.target.id)) recherche par critere*/}
+        <div className="container2">
+            <h2>Rechercher votre livre</h2>
+            <form onSubmit={submitSelectedBooks} className='form-data2'>
+                <input type="text" className="form-control2" placeholder="Entrez le titre du livre"
+                    id="title" onChange={(e) => setTitle(e.target.value)} />
 
-                    </button>
-                    <button>
-                        <a class="button" href="bien_recu.html">Reinitialiser</a>
-                     {/* //onClick={((e) => setSelectedRadio(e.target.id)) reinitialiser*/}    
+                <input type="text" className="form-control2" placeholder="Entrez l'auteur du livre"
+                    id="author" onChange={(e) => setAuthor(e.target.value)} />
+                <button className='btn' type='submit'>
+                    Rechercher
+                </button>
+                {console.log(title, author)}
+            </form>
 
-                    </button>
-                </div>
-            </div>
+            {showResults ?
+                <div className="confirmation2">
+                    <h2>Votre selection</h2>
+                    {books
+                        .filter(
+                            (book) =>
+                                book.author.toLowerCase().includes(author.toLowerCase()) && book.title.toLowerCase().includes(title.toLowerCase())
+                        )
+                        .slice(0, 3)
+                        .map((book, index) => (
+
+                            <BookCard
+                                key={book.index}
+                                title={book.title}
+                                author={book.author}
+                            />
+                        ))}
+                </div > : null}
         </div>
-//on recupere le contenue de l'input et on le passe comme props a Books pour qu'il fasse sa recherche et le tri 
-                            // <BookCard
-                            //     //ici key est l'info qui va être recupere par BookCard
-                            //     key={book.index}
-                            //     author={book.author}
-                            //     title={book.title}
-                            //     isFree={book.is_Free} />
-                            // //<li key={index}>{book.title}</li>
-
-
     )
 }
 export default Form;
-

@@ -1,9 +1,9 @@
-.container{
+/* .container{
 display:flex;
 flex-direction: row;
 flex-wrap: wrap;
 
-}
+} */
 .radio-container {
     justify-content: space-around;
     align-items: center;
@@ -13,5 +13,5 @@ flex-wrap: wrap;
     padding: 10px;
     color: black;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.452);
-    
+
 }

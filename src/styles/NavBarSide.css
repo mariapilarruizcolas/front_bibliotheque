@@ -1,0 +1,36 @@
+/* <div className="navBarSideContainer2"> container sur NavBarside.js*/
+/* <div className="navBarSide2"> container sur UserPage où il y a les deux navbar */
+.navBarSideUl {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    margin-top: 0rem;
+    padding: 0.5rem;
+
+}
+
+
+.navBarSideContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: aqua;
+    visibility: visible;
+    /* width: 70%; */
+    /* margin: 2rem; */
+
+}
+
+.navBarSide2 {
+    margin: 3rem;
+    width: 30vw;
+    background-color: aqua;
+
+}
+
+@media screen and (max-width:767px) {
+    .navBarSideUl {
+        height: 0;
+    }
+}
