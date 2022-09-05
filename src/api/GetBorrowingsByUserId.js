@@ -74,7 +74,7 @@ function GetBorrowingsByUserId() {
 
 
 
-                        {console.log('agargur', data[0])}
+
 
                         {data ?
                             data

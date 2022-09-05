@@ -74,7 +74,7 @@ function Login() {
                     <input type={passwordIsVisible ? 'test' : 'password'} className="form-control2" placeholder="Mot de passe "
                         id="password" name="password" onChange={HandleChange} />
                     <button className='btn' type='submit'>
-                        Se conecter
+                        Se connecter
                     </button>
                     <span onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
                         <img src={passwordIsVisible ? openEye : closedEye} alt={passwordIsVisible ? 'openEye icon' : 'closedEye icon'} width="32" />

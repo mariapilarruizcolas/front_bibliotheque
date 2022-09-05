@@ -1,7 +1,5 @@
-//TOUT FONCTIONE
-//Le bouton emprunter a nouveau doit mettre à 0 les varibles bookId et deadLinedate 
-//il faut mettre isFree en non: la route backfonctionne 
-//donc il faut la faire fonctionner depuis le front
+//ça marche aleatoirement
+//Refaire isFree en non si l'emprunt est correct
 import React, { useState, useContext } from 'react';
 
 import axios from 'axios';
@@ -32,7 +30,7 @@ function CreateBorrowing() {
         axios
             .get(`http://localhost:8000/api/books/${bookId}`)
             .then((res) => setAvailable(res.data.isFree));
-        console.log("tu tia", available);
+
         return available;
     }
     function addDaysToDate() {
@@ -80,25 +78,18 @@ function CreateBorrowing() {
             thisBookExistsAndIsFree(bookId);
             addDaysToDate(deadlineDate);
             goFromJsToSqlFormat(deadlineDateJs);
-            if (available === "yes") {
-                console.log("je suis là")
-                // await
-                postBorrowing(userId, bookId, deadlineDate);
-                bookNotMoreFree(bookId);
-            }
+            // if (available === "yes") {
+            //     console.log("je suis là")
+            // await
+            postBorrowing(userId, bookId, deadlineDate);
+            bookNotMoreFree(bookId);
+            // }
             // console.log('reussi', successful);
         }
         catch (err) {
             console.log(err)
         }
     }
-
-    // console.log('ce livre est libre?', available);
-    // console.log('userId', userId);
-    // console.log('bookId', bookId);
-    // console.log('deadLineDate', deadlineDate);
-
-    //console.log('successful', successful)
 
 
 
@@ -120,16 +111,13 @@ function CreateBorrowing() {
 
                             <button type="submit">Preter</button>
                         </form>
-                        {available == "non" ? <div className="confirmation2"><p>livre pas disponible</p></div> : null}
+                        {/* {available === "non" ? <div className="confirmation2"><p>livre pas disponible</p></div> : null} */}
                         {deadlineDateJs ? <div className="confirmation2">
                             <p>{successful.borrowingId}</p>
                             <h2>Livre emprunte 🎉</h2> <p>Prêt realisé</p>
                             <p>Vous devez le rendre au plus tard le {deadlineDateJs}</p>
                         </div> : null}
-                        {/* {successful ? 
-                            :
-                            <div className="confirmation2"> <p>Veuillez remplir le formulaire</p></div>}
-                    </div> */}
+
                     </div>
                 </div>
             </div >

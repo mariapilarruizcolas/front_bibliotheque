@@ -11,7 +11,7 @@ function CreateBook() {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [successful, setSuccessful] = useState("");
-    const [error, setError] = useState('');
+
     const isFree = 'yes';
 
     const submitPostBook = e => {
@@ -23,7 +23,7 @@ function CreateBook() {
                 isFree,
             })
             .then((res) => setSuccessful(res.data))
-            .catch(err => setError(err))
+            .catch(err => console.log(err))
     }
 
     return (

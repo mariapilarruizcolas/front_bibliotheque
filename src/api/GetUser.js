@@ -26,7 +26,7 @@ function GetUser() {
 
 
     }, [])
-    console.log('agargur', data);
+
 
     return (
         <div className="component2">
@@ -38,7 +38,7 @@ function GetUser() {
                     <Nav />
                 </div>
                 <div className="container2">
-                    <h2>Bonjour {firstname} userId num{userId}</h2>
+                    <h2>Bonjour {firstname} </h2>
                     <div className="confirmation2">
                         <h2>Vos données personnels</h2>
                         <p>Prénom: {data.firstname}</p>

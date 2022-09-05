@@ -12,9 +12,9 @@ import '../styles/test.css';
 function GetMyBorrowings() {
     const { userId, firstname } = useContext(UserContext);
     const [data, setData] = useState("");
+    console.log('userId', userId);
 
 
-    //const [dataBooks, setDataBooks] = useState("");
     //TODO RECUPERER LE useriD DU CONTEXT
     //et refaire la route
     //Corriger aussi le format de la date
@@ -29,7 +29,7 @@ function GetMyBorrowings() {
     }, []);
 
     console.log('context ', userId)
-    console.log('agargur2', data);
+
 
     // function frechDeadLineDate(date) {
 

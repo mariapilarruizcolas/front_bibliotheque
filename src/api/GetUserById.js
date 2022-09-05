@@ -7,10 +7,6 @@ import Nav from '../components/Nav';
 import '../styles/test.css';
 
 
-
-//TO DO RECUPERER LE email DU CONTEXT
-//trouver tous les données de l'user
-
 function GetUserById() {
     const { firstname } = useContext(UserContext);
     const [userId, setUserId] = useState("");

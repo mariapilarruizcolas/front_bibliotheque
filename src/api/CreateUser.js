@@ -1,12 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import axios from 'axios';
 import NavBar from '../components/NavBar';
 import Nav from '../components/Nav';
 import NavBarSide from '../components/NavBarSide';
-import AuthContext from "../contexts/AuthContext";
+//import AuthContext from "../contexts/AuthContext";
 import '../styles/test.css';
-
+//to do
+//le message de bienvenue change de firstname quand tu rempli le formulaire
+//on a pas recupere le firstname du context
 
 
 function Register(credentials) {
@@ -53,9 +55,11 @@ function Register(credentials) {
                     <Nav />
                 </div>
                 <div className="container2">
-                    <h2>Créer un nouveau utilisateur</h2>
+                    <h2>Bonjour </h2>
+
                     <div className="content2">
                         <form className="form-data2" onSubmit={submitPostUser}>
+                            <h2>Créer un nouveau utilisateur</h2>
                             <input type="text" className="form-control2" placeholder="Prénom"
                                 id="firstname" onChange={(e) => setFirstname(e.target.value)} />
                             <input type="text" className="form-control2" placeholder="Nom"

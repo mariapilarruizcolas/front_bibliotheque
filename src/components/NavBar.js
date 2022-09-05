@@ -9,6 +9,7 @@ function NavBar() {
 
 
     const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+    console.log('identifie', isAuthenticated);
     const clickToLogIn = e => {
 
         e.preventDefault();
@@ -35,13 +36,19 @@ function NavBar() {
     return (
         <div className="containerNavBar2">
             <NavLink to="/">
-                <h1>La bibliothèque des rêves bleus</h1> </NavLink>
+                <h1>La bibliothèque de mon village</h1> </NavLink>
 
 
             <nav className="navbar_desktop">
 
 
-                {(!isAuthenticated && (
+                {(isAuthenticated === "true" ? (
+                    <ul className='navBarUl'>
+
+                        <NavLink to="/userpage" className={(nav) => nav.isActive ? "nav-active" : ""}>
+                            <li>Espace Personnel </li></NavLink>
+                        <button className="btn-danger" onClick={handleLogout}>Déconnexion</button>
+                    </ul>) : (
                     <ul className='navBarUl'>
 
                         <NavLink to="/Login" className={(nav) => nav.isActive ? "nav-active" : ""}>
@@ -50,14 +57,15 @@ function NavBar() {
                             <li>S'enregistrer </li></NavLink>
                     </ul>
                 )
-                ) || (
-                        <ul className='navBarUl'>
+                    // : (
+                    //     <ul className='navBarUl'>
 
-                            <NavLink to="/userpage" className={(nav) => nav.isActive ? "nav-active" : ""}>
-                                <li>Espace Personnel </li></NavLink>
-                            <button className="btn-danger" onClick={handleLogout}>Déconnexion</button>
-                        </ul>
-                    )}
+                    //         <NavLink to="/userpage" className={(nav) => nav.isActive ? "nav-active" : ""}>
+                    //             <li>Espace Personnel </li></NavLink>
+                    //         <button className="btn-danger" onClick={handleLogout}>Déconnexion</button>
+                    //     </ul>
+                    // )
+                )}
 
                 <ul className='navBarUl'>
 

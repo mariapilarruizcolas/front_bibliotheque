@@ -46,7 +46,7 @@ function NavBarSide() {
                         </>
                     )} */}
 
-                {(!admin ? (
+                {(admin === "non" ? (
 
                     < ul className="navBarSideUl">
                         <div><NavLink to="/GetUser" className={(nav) => nav.isActive ? "nav-active" : ""}>

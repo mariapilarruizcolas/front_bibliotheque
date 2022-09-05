@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import React, { useState } from 'react';
-import NavBarSide from '../components/NavBarSide';
+
 import '../styles/test.css';
 import BookCard from './BookCard';
 
@@ -54,6 +54,7 @@ function Form() {
                                 key={book.index}
                                 title={book.title}
                                 author={book.author}
+                                isFree={book.isFree}
                             />
                         ))}
                 </div > : null}
