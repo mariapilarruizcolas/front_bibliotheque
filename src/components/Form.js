@@ -12,18 +12,7 @@ function Form() {
   useEffect(() => {
     console.log("Livres :", books);
   }, [books]);
-  //ça marche PAS parce que
-  //si un de deux inputs est vide il remet showResults(false)
-  // function handleTitleChange(e) {
-  //   if (e.target.value === "") {
-  //     setShowResults(false);
-  //   }
-  // }
-  // function handleAuthorChange(e) {
-  //   if (e.target.value === "") {
-  //     setShowResults(false);
-  //   }
-  // }
+
   const submitSelectedBooks = (e) => {
     setShowResults(!showResults);
     e.preventDefault();
@@ -63,7 +52,30 @@ function Form() {
       </form>
 
       {showResults ? (
-        <div className="confirmation2">
+        // <div className="confirmation2">
+        //   <h2>Votre selection</h2>
+        //   {books
+        //     .filter(
+        //       (book) =>
+        //         book.author.toLowerCase().includes(author.toLowerCase()) &&
+        //         book.title.toLowerCase().includes(title.toLowerCase())
+        //     )
+        //     .slice(0, 3)
+        //     .map((book, index) => (
+        //       <BookCard
+        //         key={book.bookId}
+        //         title={book.title}
+        //         author={book.author}
+        //         isFree={book.isFree}
+        //         image={book.img}
+        //       />
+        //     ))}
+        // </div>
+        <div
+          className={`confirmation ${
+            title.length === 0 && author.length === 0 ? "visible" : ""
+          }`}
+        >
           <h2>Votre selection</h2>
           {books
             .filter(
@@ -81,6 +93,15 @@ function Form() {
                 image={book.img}
               />
             ))}
+          {books.filter(
+            (book) =>
+              book.author.toLowerCase().includes(author.toLowerCase()) &&
+              book.title.toLowerCase().includes(title.toLowerCase())
+          ).length === 0 && (
+            <p className="error-message">
+              Aucun livre ne correspond à votre recherche
+            </p>
+          )}
         </div>
       ) : null}
     </div>

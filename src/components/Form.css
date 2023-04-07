@@ -10,6 +10,11 @@
    background-color: aliceblue;
 
  }
+.visible.confirmation{
+    opacity: 1;
+    visibility: visible;
+  }
+  
 
  button {
    background: #97DFC6;
