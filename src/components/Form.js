@@ -12,6 +12,18 @@ function Form() {
   useEffect(() => {
     console.log("Livres :", books);
   }, [books]);
+  //ça marche PAS parce que
+  //si un de deux inputs est vide il remet showResults(false)
+  // function handleTitleChange(e) {
+  //   if (e.target.value === "") {
+  //     setShowResults(false);
+  //   }
+  // }
+  // function handleAuthorChange(e) {
+  //   if (e.target.value === "") {
+  //     setShowResults(false);
+  //   }
+  // }
   const submitSelectedBooks = (e) => {
     setShowResults(!showResults);
     e.preventDefault();
@@ -33,6 +45,7 @@ function Form() {
           className="form-control2"
           placeholder="Entrez le titre du livre"
           id="title"
+          //onChange={handleTitleChange}
           onChange={(e) => setTitle(e.target.value)}
         />
 
@@ -41,7 +54,7 @@ function Form() {
           className="form-control2"
           placeholder="Entrez l'auteur du livre"
           id="author"
-          onChange={(e) => setAuthor(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <button className="btn" type="submit">
           Rechercher
