@@ -16,6 +16,20 @@ function CreateBook() {
   const [message, setMessage] = useState("");
 
   const isFree = true;
+  function handleAuthorChange(e) {
+    setAuthor(e.target.value);
+  }
+  function handleTitleChange(e) {
+    setTitle(e.target.value);
+  }
+  const handleReset = (e) => {
+    setAuthor("");
+    setTitle("");
+    setMessage("");
+    setSuccessful("");
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+  };
 
   const submitPostBook = (e) => {
     e.preventDefault();
@@ -28,7 +42,7 @@ function CreateBook() {
       .then((res) => setSuccessful(res.data))
       .catch((err) => setMessage("Erreur en creant un nouveau livre"));
   };
-
+  console.log("livre cree", successful);
   return (
     <div className="component2">
       <NavBar />
@@ -47,7 +61,9 @@ function CreateBook() {
                 className="form-control2"
                 placeholder="Entrez le titre du livre"
                 id="title"
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={handleTitleChange}
+                defaultValue={title}
+                // onChange={(e) => setTitle(e.target.value)}
               />
 
               <input
@@ -55,16 +71,23 @@ function CreateBook() {
                 className="form-control2"
                 placeholder="Entrez l'auteur du livre"
                 id="author"
-                onChange={(e) => setAuthor(e.target.value)}
+                onChange={handleAuthorChange}
+                defaultValue={author}
+                // onChange={(e) => setAuthor(e.target.value)}
               />
               <button type="submit">Envoyer</button>
             </form>
+
             {successful ? (
               <div className="confirmation2">
                 <h2>Nouveau livre ajoute 🎉 </h2>
                 <p>Titre: {title}</p>
                 <p>Author: {author}</p>
                 <p>Livre numéro: {successful.bookId}</p>
+                <p>Le livre est disponible {successful.isFree}</p>
+                <button type="button" onClick={handleReset}>
+                  Créer un autre livre
+                </button>
               </div>
             ) : null}
             {message ? (

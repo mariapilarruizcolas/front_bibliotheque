@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Authenticate from "../services/Authenticate";
@@ -13,56 +13,86 @@ import "../styles/test.css";
 function Login() {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  //const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState("");
   const [credentials, setCredentials] = useState({
     //ici on met les name
     email: "",
     password: "",
   });
 
-  const { setIsAuthenticated } = useContext(AuthContext);
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
 
   //currentTarget est le contenu de l'input actuel
   const HandleChange = ({ currentTarget }) => {
     const { name, value } = currentTarget;
-    if (currentTarget.email === "") {
+    if (name === "email" && value === "") {
       setMessage("");
-    } else if (currentTarget.password === "") {
+    } else if (name === "password" && value === "") {
       setMessage("");
     }
-    //Tu fais des pairs de valeurs name - value ex: userName - aa
-
-    //Comme les name sont differents il va mettre pour chaque name sa value
     setCredentials({
-      //on ajoute les deux valeurs de name name==userName et name==password
-      //sinon quand tu met la value de password la value de userName disparait
       ...credentials,
       [name]: value,
     });
-    //console.log(value, name)
   };
-  // async function handleSubmit(event) {
-  //     event.preventDefault();
-  //     await submitForm(event.target);
-  //     navigate("../success", { replace: true });
-  // }
   const HandleSubmit = async (event) => {
-    // let navigate = useNavigate();
-    //console.log("clicke")
     event.preventDefault();
     try {
-      await Authenticate.Authenticate(credentials);
-      setIsAuthenticated(true);
-      if (setIsAuthenticated === false) {
-        setMessage("Email ou passord non corrects");
-      }
+      setIsLoading(true);
+      await Authenticate.Authenticate(credentials, setSuccess, setMessage);
 
-      console.log("identifie ", setIsAuthenticated);
-      navigate("./userpage", { replace: true });
+      // console.log("sucess", success);
+      // if (success) {
+      //   setIsAuthenticated(true);
+      //   navigate("./userpage", { replace: true });
+      //   return;
+      // }
     } catch (err) {
       console.log(err);
+      setMessage("Invalid credentials");
+    } finally {
+      setIsLoading(false); //mettre isLoading à false une fois que l'authentification est terminée
     }
   };
+  useEffect(() => {
+    if (success) {
+      setIsAuthenticated(true);
+      navigate("./userpage", { replace: true });
+    }
+  }, [success, navigate, setIsAuthenticated]);
+
+  //       setMessage("Invalid credentials");
+  //     }
+  //   } catch (err) {
+  //     setMessage(err.message);
+  //     console.log(err);
+  //   }
+  // };
+
+  // const HandleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const authResult = await Authenticate.Authenticate(
+  //       credentials,
+  //       setSuccess
+  //     );
+
+  //     if (authResult.success) {
+  //       console.log("isAuthenticated: ", isAuthenticated);
+
+  //       navigate("./userpage", { replace: true });
+  //       return;
+  //     } else {
+  //       setMessage("invalid credentials");
+  //     }
+  //   } catch (err) {
+  //     setMessage(err.message);
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <div className="component2">
@@ -100,10 +130,16 @@ function Login() {
             />
           </span>
         </form>
-        {message && (
-          <div className="confirmation2">
-            <p>{message}</p>
+        {isLoading ? (
+          <div className="loading">
+            <p>Chargement en cours...</p>
           </div>
+        ) : (
+          message && (
+            <div className="confirmation2">
+              <p>{message}</p>
+            </div>
+          )
         )}
       </div>
     </div>

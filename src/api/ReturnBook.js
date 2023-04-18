@@ -11,30 +11,33 @@ function ReturnBook() {
   const [bookId, setBookId] = useState("");
   const [message, setMessage] = useState("");
 
-  function handleBookIdChange(e) {
-    setBookId(Number(e.target.value));
-    if (e.target.value === "") {
-      setMessage("");
-    }
-  }
   async function thisBookExistsAndIsFree(bookId) {
     try {
       const response = await axios.get(
         `http://localhost:8000/api/books/${bookId}`
       );
-      if (response.status === 404) {
-        setMessage("Le livre n'existe pas à cette bibliothèque");
-      } else if (response.status === 422) {
-        setMessage("Erreur de validation des données");
-      } else if (response.status === 500) {
-        setMessage("Une erreur est survenue");
-      } else {
-        const available = response.data.isFree;
-        console.log("le livre est disponible ? ", available);
-        return available;
-      }
+      const available = response.data.isFree;
+      return available;
+      // if (response.status === 404) {
+      //   setMessage("Le livre n'existe pas à cette bibliothèque");
+      // } else if (response.status === 422) {
+      //   setMessage("Erreur de validation des données");
+      // } else if (response.status === 500) {
+      //   setMessage("Une erreur est survenue");
+      // } else {
+      //   const available = response.data.isFree;
+      //   console.log("le livre est disponible ? ", available);
+      //   return available;
+      // }
     } catch (err) {
       console.log(err);
+      setMessage(err.response.data);
+    }
+  }
+  function handleBookIdChange(e) {
+    setBookId(Number(e.target.value));
+    if (e.target.value === "") {
+      setMessage("");
     }
   }
 
@@ -42,22 +45,24 @@ function ReturnBook() {
     axios
       .put(`http://localhost:8000/api/borrowing/${bookId}`)
       .then((res) => setMessage(res.data))
-      .catch((err) => console.log(err));
+
+      .catch((err) => setMessage(err.response.data));
     console.log("Rendered book", message);
     return message;
   };
   async function submitReturnBook(e) {
     e.preventDefault();
-    if (e.target.value === "") {
-      setMessage("");
-    }
+
     console.log("typeof de bookId", typeof bookId);
+
     try {
       const isBookFree = await thisBookExistsAndIsFree(bookId);
+      console.log("isBookFree ", isBookFree);
       if (isBookFree === 1) {
         setMessage("Le livre n'est pas emprunte");
       } else {
         const response = await returnOneBook(bookId);
+        console.log("Reponse ", response);
         if (response.status === 404) {
           setMessage("Le livre n'existe pas dans la liste d'emprunts");
         } else if (response.status === 422) {
@@ -71,9 +76,13 @@ function ReturnBook() {
         }
         return message;
       }
-    } catch (err) {
-      setMessage("Une erreur est survenue");
+    } catch (error) {
+      console.error("agargur", error);
+      setMessage(error.response.data);
     }
+    // } catch (err) {
+    //   setMessage("Une erreur est survenue");
+    // }
   }
 
   return (
@@ -98,11 +107,11 @@ function ReturnBook() {
               />
               <button type="submit">Rendre le livre</button>
             </form>
-            {message && (
+            {message ? (
               <div className="confirmation2">
                 <p>{message}</p>
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       </div>

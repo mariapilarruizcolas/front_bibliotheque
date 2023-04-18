@@ -21,8 +21,10 @@ function GetBorrowingsByUserId() {
 
   function handleUserIdChange(e) {
     setUserId(Number(e.target.value));
+    console.log("userId", userId);
     if (e.target.value === "") {
       setMessage("");
+      setData("");
     }
   }
   const submitGetBorrowing = (e) => {
@@ -33,6 +35,7 @@ function GetBorrowingsByUserId() {
       .get(`http://localhost:8000/api/borrowing/${userId}`)
       .then((response) => {
         console.log("type of", typeof response.data);
+        console.log("response", response.data);
         if (response.status === 404) {
           setMessage("Pas d'emprunts");
         } else if (response.status === 422) {
@@ -46,7 +49,9 @@ function GetBorrowingsByUserId() {
         }
       })
       .catch((error) => {
-        setMessage("Pas d'emprunts");
+        setMessage(error.response.data);
+        console.log("error", error);
+        //setMessage("Pas d'emprunts");
       });
     // setLoading(false);
 
@@ -85,6 +90,8 @@ function GetBorrowingsByUserId() {
             </form>
           </div>
           <div>
+            {console.log("Message", message)}
+            {console.log("books", data[0])}
             {data
               ? data.map((book) => (
                   <div className="confirmation2" key={book.bookId}>
@@ -97,7 +104,7 @@ function GetBorrowingsByUserId() {
               : null}
             {message ? (
               <div className="confirmation2">
-                <p>{message}</p>{" "}
+                <p>{message}</p>
               </div>
             ) : null}
           </div>

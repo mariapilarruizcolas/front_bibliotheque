@@ -27,6 +27,7 @@ function CreateBorrowing() {
       const response = await axios.get(
         `http://localhost:8000/api/books/${bookId}`
       );
+
       if (response.status === 404) {
         setMessage("Le livre n'existe pas à cette bibliothèque");
       } else if (response.status === 422) {
@@ -80,7 +81,7 @@ function CreateBorrowing() {
       setShowResult(true);
       return;
     } catch (error) {
-      console.error(error);
+      console.error("agargur ", error);
       setMessage(error.response.data);
       return error.response.data;
     }
