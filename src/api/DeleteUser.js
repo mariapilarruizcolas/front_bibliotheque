@@ -1,23 +1,24 @@
 import React, { useState, useContext } from "react";
-
 import axios from "axios";
-import UserContext from "../contexts/UserContext";
-import NavBar from "../components/NavBar";
-import Nav from "../components/Nav";
+
+import NavigationBarre from "../components/NavigationBarre";
 import NavBarSide from "../components/NavBarSide";
-import "../styles/test.css";
+import Footer from "../components/Footer";
+import Alert from "../components/Alert";
+
+import UserContext from "../contexts/UserContext";
+
+import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 //TO DO LISTE
-//VERIFIER SI L'USERID EXISTE ET S'IL A PAS D'EMPRUNTS
-
 //DEMANDER CONFIRMATION AVANT DE SUPRIMER
-//lE MESSAGE DOIT S'AFFICHER SEULEMENT SI SUCCES
+
 function DeleteUser() {
   const { firstname } = useContext(UserContext);
-  // const [data, setData] = useState("");
   const [userId, setUserId] = useState("");
   const [message, setMessage] = useState("");
-  //const [successful, setSuccessful] = useState('');
+
   function handleUserIdChange(e) {
     setUserId(Number(e.target.value));
     if (e.target.value === "") {
@@ -33,25 +34,13 @@ function DeleteUser() {
         `http://localhost:8000/api/users/${userId}`
       );
       console.log("Reponse", response);
-      if (response.status === 404) {
-        setMessage("Utilisateur non trouvé");
-        console.log("message", message);
-      } else if (response.status === 200) {
-        setMessage("🎉 Utilisateur supprimé avec succès!");
-      } else if (response.status === 403) {
-        setMessage(
-          "L'utilisateur a des emprunts en cours et il ne peut pas être supprimé"
-        );
-      } else if (response.status === 500) {
-        setMessage("Une erreur est survenue");
-      }
+
+      setMessage(response.data);
+      console.log("Message", message);
     } catch (error) {
       console.error("agargur ", error);
       setMessage(error.response.data);
       return error.response.data;
-      // console.log("Erreur", err);
-
-      // setMessage("Une erreur est survenue");
     }
   }
 
@@ -93,40 +82,98 @@ function DeleteUser() {
   //   }
 
   return (
-    <div className="component2">
-      <NavBar />
-      <div className="userpage2">
-        <div className="navBarSide2">
-          <NavBarSide />
-          <Nav />
-        </div>
-        <div className="container2">
-          <h2>Bonjour {firstname}</h2>
-          {/* // {console.log("data", data)} */}
-          <div className="content2">
-            <form className="form-data2" onSubmit={submitDeleteUser}>
-              <h2>Supprimer un utilisateur</h2>
-              <input
-                type="text"
-                className="form-control2"
-                placeholder="Entrez le numero de l'utilisateur"
-                id="userId"
-                onChange={handleUserIdChange}
-              />
+    <>
+      <main class="container-fluid">
+        {/* // <div className="component2"> */}
+        <NavigationBarre />
+        <Container>
+          {/* Premier file avec les horaires,
+     venir nous voir et le formulaire */}
+          <Row className="px-4 my-5">
+            <Col sm={4}>
+              <NavBarSide />
+            </Col>
 
-              <button type="submit">Suprimer utilisateur</button>
-            </form>
+            <Col sm={8}>
+              <Row>
+                <Card className="my-3 width-500">
+                  <Card.Body>
+                    <Card.Title>Bonjour {firstname}</Card.Title>
+                    <Card.Text>Bienvenue dans ta page personnel</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Row>
+              <Row>
+                <h1 class="font-weigh-light">Supprimer un utilisateur</h1>
+                <Form onSubmit={submitDeleteUser}>
+                  <Form.Group className="mb-3">
+                    <Form.Control
+                      type="text"
+                      placeholder="Entrez le numero de l'utilisateur"
+                      id="userId"
+                      onChange={handleUserIdChange}
+                    />
+                  </Form.Group>
 
-            {message ? (
-              <div className="confirmation2">
-                {/* <h2>🎉 Utilisateur supprimé! </h2> */}
-                <h2>{message}</h2>
-              </div>
-            ) : null}
-          </div>
-        </div>
-      </div>
-    </div>
+                  <Button variant="primary" type="submit">
+                    Suprimer utilisateur
+                  </Button>
+                </Form>
+
+                {message ? (
+                  <Card className="my-3 width-500">
+                    <Card.Body>
+                      <Card.Text>
+                        <p>{message}</p>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                ) : null}
+              </Row>
+            </Col>
+          </Row>
+
+          <Row className="margin-bottom-2">
+            <Alert />
+          </Row>
+        </Container>
+      </main>
+      <Footer />
+    </>
+    // <div className="component2">
+    //   <NavigationBarre />
+    //   <div className="userpage2">
+    //     <div className="NavBarSide2">
+    //       <NavBarSide />
+    //       <Menu />
+    //     </div>
+    //     <div className="container2">
+    //       <h2>Bonjour {firstname}</h2>
+    //       {/* // {console.log("data", data)} */}
+    //       <div className="content2">
+    //         <form className="form-data2" onSubmit={submitDeleteUser}>
+    //           <h2>Supprimer un utilisateur</h2>
+    //           <input
+    //             type="text"
+    //             className="form-control2"
+    //             placeholder="Entrez le numero de l'utilisateur"
+    //             id="userId"
+    //             onChange={handleUserIdChange}
+    //           />
+
+    //           <button type="submit">Suprimer utilisateur</button>
+    //         </form>
+
+    //         {message ? (
+    //           <div className="confirmation2">
+    //             {/* <h2>🎉 Utilisateur supprimé! </h2> */}
+    //             <h2>{message}</h2>
+    //           </div>
+    //         ) : null}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 

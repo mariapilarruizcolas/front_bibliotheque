@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../components/NavBar";
+import NavigationBarre from "../components/NavigationBarre";
 import Authenticate from "../services/Authenticate";
 import "../components/Form.css";
 import openEye from "../icons/openEye.svg";
@@ -8,7 +8,28 @@ import closedEye from "../icons/closedEye.svg";
 
 import AuthContext from "../contexts/AuthContext";
 
+import Infos from "../components/Infos";
+import Formu from "../components/Formu";
+import News from "../components/News";
+import Footer from "../components/Footer";
+import Alert from "../components/Alert";
+
 import "../styles/test.css";
+import {
+  Button,
+  Form,
+  Nav,
+  NavBar,
+  Carousel,
+  NavDropdown,
+  Container,
+  Row,
+  Col,
+  Image,
+  Card,
+} from "react-bootstrap";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -43,13 +64,6 @@ function Login() {
     try {
       setIsLoading(true);
       await Authenticate.Authenticate(credentials, setSuccess, setMessage);
-
-      // console.log("sucess", success);
-      // if (success) {
-      //   setIsAuthenticated(true);
-      //   navigate("./userpage", { replace: true });
-      //   return;
-      // }
     } catch (err) {
       console.log(err);
       setMessage("Invalid credentials");
@@ -62,7 +76,8 @@ function Login() {
       setIsAuthenticated(true);
       navigate("./userpage", { replace: true });
     }
-  }, [success, navigate, setIsAuthenticated]);
+    // }, [success, navigate, setIsAuthenticated]);
+  }, [success]);
 
   //       setMessage("Invalid credentials");
   //     }
@@ -95,54 +110,82 @@ function Login() {
   // };
 
   return (
-    <div className="component2">
-      <NavBar />
-      <div className="container2">
-        <h2>Veuillez-vous connecter</h2>
-        <form onSubmit={HandleSubmit} className="form-data2">
-          <input
-            type="text"
-            className="form-control2"
-            placeholder="Identifiant"
-            id="email"
-            name="email"
-            onChange={HandleChange}
-          />
-          {/* //quand on change quelque chose de l'input ça va mettre
-                    //la valeur de ce qui est ecrit dedans l'input (target.value)
-                    // à l'interieur de title ou author en changeant son State */}
-          <input
-            type={passwordIsVisible ? "test" : "password"}
-            className="form-control2"
-            placeholder="Mot de passe "
-            id="password"
-            name="password"
-            onChange={HandleChange}
-          />
-          <button className="btn" type="submit">
-            Se connecter
-          </button>
-          <span onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
-            <img
-              src={passwordIsVisible ? openEye : closedEye}
-              alt={passwordIsVisible ? "openEye icon" : "closedEye icon"}
-              width="32"
-            />
-          </span>
-        </form>
-        {isLoading ? (
-          <div className="loading">
-            <p>Chargement en cours...</p>
-          </div>
-        ) : (
-          message && (
-            <div className="confirmation2">
-              <p>{message}</p>
-            </div>
-          )
-        )}
-      </div>
-    </div>
+    <>
+      <main class="container-fluid">
+        <NavigationBarre />
+        <Container>
+          {/* Premier file avec les horaires,
+         venir nous voir et le formulaire */}
+          <Row className="px-4 my-5">
+            <Col sm={4}>
+              <Infos />
+            </Col>
+
+            <Col sm={8}>
+              <Row>
+                <h1 class="font-weigh-light">Veuillez-vous connecter</h1>
+                <Form onSubmit={HandleSubmit}>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control
+                      type="text"
+                      className="form-control2"
+                      placeholder="Identifiant"
+                      id="email"
+                      name="email"
+                      onChange={HandleChange}
+                    />
+                  </Form.Group>
+
+                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Control
+                      type={passwordIsVisible ? "test" : "password"}
+                      className="form-control2"
+                      placeholder="Mot de passe "
+                      id="password"
+                      name="password"
+                      onChange={HandleChange}
+                    />
+                  </Form.Group>
+
+                  <Button variant="primary" type="submit">
+                    Se connecter
+                  </Button>
+                  <span
+                    onClick={() => setPasswordIsVisible(!passwordIsVisible)}
+                  >
+                    <img
+                      src={passwordIsVisible ? openEye : closedEye}
+                      alt={
+                        passwordIsVisible ? "openEye icon" : "closedEye icon"
+                      }
+                      width="32"
+                    />
+                  </span>
+                </Form>
+                {isLoading ? (
+                  <div className="loading">
+                    <p>Chargement en cours...</p>
+                  </div>
+                ) : (
+                  message && (
+                    <div className="confirmation2">
+                      <p>{message}</p>
+                    </div>
+                  )
+                )}
+              </Row>
+
+              <News />
+            </Col>
+          </Row>
+
+          <Row className="margin-bottom-2">
+            <Alert />
+          </Row>
+        </Container>
+      </main>
+      <Footer />
+    </>
   );
 }
 export default Login;

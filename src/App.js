@@ -21,6 +21,7 @@ import CreateUser from "./api/CreateUser";
 //import SearchBookByBookId from './api/SearchBookByBookId';
 import DeleteBook from "./api/DeleteBook";
 import GetMyBorrowings from "./api/GetMyBorrowings";
+import Actus from "./pages/Actus";
 // import Test2 from './components/Test2';
 
 //import ThisBookIsFree from './components/ThisBookIsFree';
@@ -52,6 +53,7 @@ function App() {
             <Route path="/returnBook" element={<ReturnBook />} />
             <Route path="/createBorrowing" element={<CreateBorrowing />} />
             <Route path="/aide" element={<Aide />} />
+            <Route path="/actus" element={<Actus />} />
             <Route path="/getUser" element={<GetUser />} />
             <Route path="/getUserById" element={<GetUserById />} />
             <Route path="/deleteUser" element={<DeleteUser />} />

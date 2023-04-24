@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import NavBar from "../components/NavBar";
-import Nav from "../components/Nav";
+
+import NavigationBarre from "../components/NavigationBarre";
 import NavBarSide from "../components/NavBarSide";
+import Footer from "../components/Footer";
+import Alert from "../components/Alert";
 
 import UserContext from "../contexts/UserContext";
-import "../styles/test.css";
+
+import { Container, Row, Col, Card } from "react-bootstrap";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function GetMyBorrowings() {
   const { userId, firstname } = useContext(UserContext);
@@ -62,36 +67,96 @@ function GetMyBorrowings() {
     return <div>Loading...</div>;
   }
   return (
-    <div className="component2">
-      <NavBar />
+    <>
+      <main class="container-fluid">
+        {/* // <div className="component2"> */}
+        <NavigationBarre />
+        <Container>
+          {/* Premier file avec les horaires,
+     venir nous voir et le formulaire */}
+          <Row className="px-4 my-5">
+            <Col sm={4}>
+              <NavBarSide />
+            </Col>
 
-      <div className="userpage2">
-        {/* <h1>GEt borrowings</h1> */}
+            <Col sm={8}>
+              <Row>
+                <Card className="my-3 width-500">
+                  <Card.Body>
+                    <Card.Title>Bonjour {firstname}</Card.Title>
+                    <Card.Text>Bienvenue dans ta page personnel</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Row>
+              <Row>
+                <h2>Bonjour {firstname}</h2>
 
-        <div className="navBarSide2">
-          <NavBarSide />
-          <Nav />
-        </div>
-        <div className="container2">
-          <h2>Bonjour {firstname}</h2>
-          <div className="content2">
-            <h2>Vos prêts en cours</h2>
-            {message ? <p>{message}</p> : null}
+                <h1 class="font-weigh-light">Vos prêts en cours</h1>
 
-            {data
-              ? data.map((book) => (
-                  <div className="confirmation2" key={book.bookId}>
-                    <p>Titre {book.title}</p>
-                    <p>Auteur {book.author}</p>
+                {data
+                  ? data.map((book) => (
+                      <Card className="my-3 width-500">
+                        <Card.Body>
+                          <Card.Text>
+                            <p>Titre {book.title}</p>
+                            <p>Auteur {book.author}</p>
+                            <p>Date limite {book.deadlineDate}</p>
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                    ))
+                  : null}
 
-                    <p>Date limite {book.deadlineDate}</p>
-                  </div>
-                ))
-              : null}
-          </div>
-        </div>
-      </div>
-    </div>
+                {message ? (
+                  <Card className="my-3 width-500">
+                    <Card.Body>
+                      <Card.Text>
+                        <p>{message}</p>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                ) : null}
+              </Row>
+            </Col>
+          </Row>
+
+          <Row className="margin-bottom-2">
+            <Alert />
+          </Row>
+        </Container>
+      </main>
+      <Footer />
+    </>
+    // <div className="component2">
+    //   <NavigationBarre />
+
+    //   <div className="userpage2">
+    //     {/* <h1>GEt borrowings</h1> */}
+
+    //     <div className="NavBarSide2">
+    //       <NavBarSide />
+    //       <Menu />
+    //     </div>
+    //     <div className="container2">
+    //       <h2>Bonjour {firstname}</h2>
+    //       <div className="content2">
+    //         <h2>Vos prêts en cours</h2>
+    //         {message ? <p>{message}</p> : null}
+
+    //         {data
+    //           ? data.map((book) => (
+    //               <div className="confirmation2" key={book.bookId}>
+    //                 <p>Titre {book.title}</p>
+    //                 <p>Auteur {book.author}</p>
+
+    //                 <p>Date limite {book.deadlineDate}</p>
+    //               </div>
+    //             ))
+    //           : null}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 

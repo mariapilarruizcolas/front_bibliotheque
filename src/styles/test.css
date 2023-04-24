@@ -61,7 +61,7 @@ p {
     border-style: inset;
     margin-top: 0.5rem;
     height: auto;
-    width: 60vw;
+    /* width: 60vw; */
     /* background-color: bisque; */
     padding-top: 0.5rem;
 
@@ -176,7 +176,7 @@ p {
 }
 
 @media screen and (max-width:767px) {
-    .navBarSideContainer {
+    .NavBarSideContainer {
         visibility: hidden;
 
     }
@@ -188,7 +188,7 @@ p {
         margin: 0;
     }
 
-    .navBarSide2 {
+    .NavBarSide2 {
         width: 0;
         margin: 0;
 

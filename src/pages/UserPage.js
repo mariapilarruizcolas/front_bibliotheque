@@ -1,48 +1,65 @@
-import React, { useContext } from 'react';
-import NavBar from '../components/NavBar';
-import Nav from '../components/Nav';
-import NavBarSide from '../components/NavBarSide';
+import React, { useContext } from "react";
+import NavigationBarre from "../components/NavigationBarre";
+//import Menu from "../components/Menu";
+import NavBarSide from "../components/NavBarSide";
+import Footer from "../components/Footer";
+import Alert from "../components/Alert";
 
-import UserContext from '../contexts/UserContext';
-import '../styles/test.css';
+import UserContext from "../contexts/UserContext";
+import "../styles/test.css";
+import {
+  Button,
+  Form,
+  Nav,
+  NavBar,
+  Carousel,
+  NavDropdown,
+  Container,
+  Row,
+  Col,
+  Image,
+  Card,
+} from "react-bootstrap";
 
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function UserPage() {
-    const { admin, firstname, userId, email } = useContext(UserContext);
-    console.log('userId', userId);
-    console.log('firstname', firstname);
-    console.log('email', email);
-    console.log('admin', admin);
-    return (
-        <div className="component2">
-            <NavBar />
-            <div className='userpage2'>
-                <div className="navBarSide2">
-                    <Nav />
-                    <NavBarSide />
-                </div>
-                <div className="container2">
-                    {/* <div className="userPageContents"> */}
-                    {/* <h2>Bonjour {firstname} {userId} {admin}</h2> */}
-                    <h2>Bonjour {firstname}</h2>
+  const { admin, firstname, userId, email } = useContext(UserContext);
+  console.log("userId", userId);
+  console.log("firstname", firstname);
+  console.log("email", email);
+  console.log("admin", admin);
+  return (
+    <>
+      <main class="container-fluid">
+        {/* // <div className="component2"> */}
+        <NavigationBarre />
+        <Container>
+          {/* Premier file avec les horaires,
+           venir nous voir et le formulaire */}
+          <Row className="px-4 my-5">
+            <Col sm={4}>
+              <NavBarSide />
+            </Col>
 
-                    <div className="content2">
-                        <p>Bienvenue dans ta page personnel</p>
-                        {/* <p>Ici vos donnéés personnels </p>
-                        <p>ou </p>
-                        <p>La liste de livres empruntés </p>
-                        <p>Name</p> */}
-                    </div>
+            <Col sm={8}>
+              <Card className="my-3 width-500">
+                <Card.Body>
+                  <Card.Title>Bonjour {firstname}</Card.Title>
+                  <Card.Text>Bienvenue dans ta page personnel</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
 
-                </div>
-            </div>
-        </div>
-
-    );
+          <Row className="margin-bottom-2">
+            <Alert />
+          </Row>
+        </Container>
+      </main>
+      <Footer />
+    </>
+  );
 }
 
 export default UserPage;
-
-
-

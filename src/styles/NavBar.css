@@ -1,5 +1,5 @@
 
-.navbar_desktop {
+.NavigationBarre_desktop {
     width: auto;
     visibility: visible;
     display: flex;
@@ -18,7 +18,7 @@ h1 {
     font-size: 5wh;
 }
 
-.navBarUl {
+.NavigationBarreUl {
     list-style-type: none;
     display: flex;
     flex-direction: row;
@@ -46,15 +46,17 @@ a:hover {
     color: blue;
 }
 
-.containerNavBar2 {
+ /* .containerNavigationBarre2 {
      background-color: bisque; 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 0.5rem;
     padding: 0.5rem;
+    width: auto;
+   
 
-}
+}  */
 
 .buttonsBar {
     visibility: hidden;
@@ -75,12 +77,12 @@ a:hover {
         height: auto;
     }
 
-    .containerNavBar2 {
+    .containerNavigationBarre2 {
         flex-direction: column;
 
     }
 
-    .navbar_desktop {
+    .NavigationBarre_desktop {
         width: 0;
         height: 0;
         visibility: hidden;

@@ -1,87 +1,74 @@
-import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
-import UserContext from '../contexts/UserContext';
-import '../styles/test.css';
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import Logout from "./Logout";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../contexts/UserContext";
+import AuthContext from "../contexts/AuthContext";
+// import "../styles/test.css";
+import {
+  Button,
+  Form,
+  Nav,
+  NavigationBarre,
+  Carousel,
+  NavDropdown,
+  Container,
+  Row,
+  Col,
+  Image,
+  Card,
+} from "react-bootstrap";
 
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function NavBarSide() {
-    const { admin, firstname, userId } = useContext(UserContext);
+  const navigate = useNavigate();
 
-    console.log(admin, firstname, userId);
-    return (
-        <div className="navBarSideContainer">
-
-            {/* <p>Admin: {admin}</p> */}
-            {/* <p>{firstname}</p>
+  const { admin, firstname, userId } = useContext(UserContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  console.log(admin, firstname, userId);
+  const handleLogout = () => {
+    Logout();
+    setIsAuthenticated(false);
+    navigate("../login", { replace: true });
+  };
+  return (
+    <Card>
+      {/* <p>Admin: {admin}</p> */}
+      {/* <p>{firstname}</p>
             <p>{userId}</p> */}
-            <nav>
-                <ul className="navBarSideUl">
-                    <div><NavLink to="/CreateBorrowing" className={(nav) => nav.isActive ? "nav-active" : ""}>
-                        <li>Emprunter un livre </li></NavLink></div>
-                    <div><NavLink to="/ReturnBook" className={(nav) => nav.isActive ? "nav-active" : ""}>
-                        <li> Rendre un livre</li></NavLink></div>
-                </ul>
-                {/* 
-                {(!isAuthenticated && (
-                    me="nav-link" to="/login">
-                                Se connecter
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/register">
-                                S'enregistrer
-                            </NavLink>
-                        </li>
-                    </>
-                )) || (
-                        <>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/account">
-                                    Mon compte
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <button className="btn btn-danger" onClick={handleLogout}>Déconnexion</button>
-                            </li>
-                        </>
-                    )} */}
 
-                {(admin === "non" ? (
+      {admin === "non" ? (
+        <Nav className="flex-column">
+          <Nav.Link href="/CreateBorrowing">Emprunter un livre</Nav.Link>
+          <Nav.Link href="/ReturnBook">Rendre un livre</Nav.Link>
+          <Nav.Link href="/GetUser">Mes données personnels</Nav.Link>
+          <Nav.Link href="/GetMyBorrowings">Mes emprunts</Nav.Link>
+          <Button className="btn-danger" onClick={handleLogout}>
+            Déconnexion
+          </Button>
+        </Nav>
+      ) : (
+        <Nav className="flex-column">
+          <Nav.Link href="/CreateBorrowing">Emprunter un livre</Nav.Link>
+          <Nav.Link href="/ReturnBook">Rendre un livre</Nav.Link>
+          <Nav.Link href="/CreateUser">Créer un nouveau utilisateur</Nav.Link>
+          <Nav.Link href=" /DeleteUser">Suprimer un utilisateur</Nav.Link>
+          <Nav.Link href="/GetUserById">
+            Consulter les données d'un utilisateur
+          </Nav.Link>
+          <Nav.Link href="/GetBorrowingsByUserId">
+            Consulter ses emprunts
+          </Nav.Link>
+          <Nav.Link href="/CreateBook">Ajouter un nouveau livre</Nav.Link>
+          <Nav.Link href="/DeleteBook">Suprimer un livre </Nav.Link>
 
-                    < ul className="navBarSideUl">
-                        <div><NavLink to="/GetUser" className={(nav) => nav.isActive ? "nav-active" : ""}>
-                            <li>Mes données personnels </li></NavLink></div>
-                        <div><NavLink to="/GetMyBorrowings" className={(nav) => nav.isActive ? "nav-active" : ""}>
-                            <li> Mes emprunts</li></NavLink></div>
-                    </ul>
-                )
-                    : (
-                        <div>
-                            <ul className="navBarSideUl">
-                                {/* <p>Utilisateurs</p> */}
-                                <div><NavLink to="/CreateUser" className={(nav) => nav.isActive ? "nav-active" : ""}>
-                                    <li>Créer un nouveau utilisateur </li></NavLink></div>
-                                <div><NavLink to="/GetUserById" className={(nav) => nav.isActive ? "nav-active" : ""}>
-                                    <li>Consulter les données d'un utilisateur</li></NavLink></div>
-                                <div><NavLink to="/DeleteUser" className={(nav) => nav.isActive ? "nav-active" : ""}>
-                                    <li>Suprimer un utilisateur </li></NavLink></div>
-                                <div><NavLink to="/GetBorrowingsByUserId" className={(nav) => nav.isActive ? "nav-active" : ""}>
-                                    <li>Consulter ses emprunts</li></NavLink></div>
-                            </ul>
-                            <ul className="navBarSideUl">
-                                {/* <p>Livres</p> */}
-                                <div><NavLink to="/CreateBook" className={(nav) => nav.isActive ? "nav-active" : ""}>
-                                    <li>Ajouter un nouveau livre </li></NavLink></div>
-
-                                <div><NavLink to="/DeleteBook" className={(nav) => nav.isActive ? "nav-active" : ""}>
-                                    <li>Suprimer un livre </li></NavLink></div>
-                            </ul>
-
-                        </div>))}
-            </nav>
-
-        </div >
-    )
-
+          <Button className="btn-danger" onClick={handleLogout}>
+            Déconnexion
+          </Button>
+        </Nav>
+      )}
+    </Card>
+  );
 }
 export default NavBarSide;

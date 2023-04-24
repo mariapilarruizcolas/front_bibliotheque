@@ -1,11 +1,15 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import NavBar from "../components/NavBar";
-import Nav from "../components/Nav";
+
+import NavigationBarre from "../components/NavigationBarre";
 import NavBarSide from "../components/NavBarSide";
+import Footer from "../components/Footer";
+import Alert from "../components/Alert";
 
 import UserContext from "../contexts/UserContext";
-import "../styles/test.css";
+
+import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function CreateBorrowing() {
   let { userId, firstname } = useContext(UserContext);
@@ -116,37 +120,95 @@ function CreateBorrowing() {
   }
 
   return (
-    <div className="component2">
-      <NavBar />
-      <div className="userpage2">
-        <div className="navBarSide2">
-          <NavBarSide />
-          <Nav />
-        </div>
-        <div className="container2">
-          <h2>Bonjour {firstname}</h2>
-          <div className="content2">
-            <form className="form-data2" onSubmit={submitPostBorrowing}>
-              <h2>Emprunter un livre</h2>
-              <input
-                type="text"
-                className="form-control2"
-                placeholder="Entrez le code de barres du livre"
-                id="bookId"
-                onChange={handleBookIdChange}
-              />
+    <>
+      <main class="container-fluid">
+        {/* // <div className="component2"> */}
+        <NavigationBarre />
+        <Container>
+          {/* Premier file avec les horaires,
+       venir nous voir et le formulaire */}
+          <Row className="px-4 my-5">
+            <Col sm={4}>
+              <NavBarSide />
+            </Col>
 
-              <button type="submit">Preter</button>
-            </form>
-            {message && (
-              <div className="confirmation2">
-                <p>{message}</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
+            <Col sm={8}>
+              <Row>
+                <Card className="my-3 width-500">
+                  <Card.Body>
+                    <Card.Title>Bonjour {firstname}</Card.Title>
+                    <Card.Text>Bienvenue dans ta page personnel</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Row>
+              <Row>
+                <h1 class="font-weigh-light">Emprunter un livre</h1>
+                <Form onSubmit={submitPostBorrowing}>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control
+                      type="text"
+                      placeholder="Entrez le code de barres du livre"
+                      id="bookId"
+                      onChange={handleBookIdChange}
+                    />
+                  </Form.Group>
+
+                  <Button variant="primary" type="submit">
+                    Preter
+                  </Button>
+                </Form>
+
+                {message ? (
+                  <Card className="my-3 width-500">
+                    <Card.Body>
+                      <Card.Text>
+                        <p>{message}</p>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                ) : null}
+              </Row>
+            </Col>
+          </Row>
+
+          <Row className="margin-bottom-2">
+            <Alert />
+          </Row>
+        </Container>
+      </main>
+      <Footer />
+    </>
+    // <div className="component2">
+    //   <NavigationBarre />
+    //   <div className="userpage2">
+    //     <div className="NavBarSide2">
+    //       <NavBarSide />
+    //       <Menu />
+    //     </div>
+    //     <div className="container2">
+    //       <h2>Bonjour {firstname}</h2>
+    //       <div className="content2">
+    //         <form className="form-data2" onSubmit={submitPostBorrowing}>
+    //           <h2>Emprunter un livre</h2>
+    //           <input
+    //             type="text"
+    //             className="form-control2"
+    //             placeholder="Entrez le code de barres du livre"
+    //             id="bookId"
+    //             onChange={handleBookIdChange}
+    //           />
+
+    //           <button type="submit">Preter</button>
+    //         </form>
+    //         {message && (
+    //           <div className="confirmation2">
+    //             <p>{message}</p>
+    //           </div>
+    //         )}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 
