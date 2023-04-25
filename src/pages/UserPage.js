@@ -7,19 +7,7 @@ import Alert from "../components/Alert";
 
 import UserContext from "../contexts/UserContext";
 import "../styles/test.css";
-import {
-  Button,
-  Form,
-  Nav,
-  NavBar,
-  Carousel,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Image,
-  Card,
-} from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 

@@ -1,23 +1,11 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+//import { NavLink } from "react-router-dom";
 import Logout from "./Logout";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 import AuthContext from "../contexts/AuthContext";
 // import "../styles/test.css";
-import {
-  Button,
-  Form,
-  Nav,
-  NavigationBarre,
-  Carousel,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Image,
-  Card,
-} from "react-bootstrap";
+import { Button, Nav, Card } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import NavigationBarre from "../components/NavigationBarre";
+
 import Authenticate from "../services/Authenticate";
 import "../components/Form.css";
 import openEye from "../icons/openEye.svg";
@@ -9,25 +9,12 @@ import closedEye from "../icons/closedEye.svg";
 import AuthContext from "../contexts/AuthContext";
 
 import Infos from "../components/Infos";
-import Formu from "../components/Formu";
 import News from "../components/News";
 import Footer from "../components/Footer";
 import Alert from "../components/Alert";
-
-import "../styles/test.css";
-import {
-  Button,
-  Form,
-  Nav,
-  NavBar,
-  Carousel,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Image,
-  Card,
-} from "react-bootstrap";
+import NavigationBarre from "../components/NavigationBarre";
+//import "../styles/test.css";
+import { Button, Form, Container, Row, Col } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -64,6 +51,7 @@ function Login() {
     try {
       setIsLoading(true);
       await Authenticate.Authenticate(credentials, setSuccess, setMessage);
+      console.log("Chui");
     } catch (err) {
       console.log(err);
       setMessage("Invalid credentials");

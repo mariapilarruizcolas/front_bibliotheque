@@ -31,17 +31,17 @@ function DeleteBook() {
       const response = await axios.delete(
         `http://localhost:8000/api/books/${bookId}`
       );
-      //setMessage(response.data);
+      setMessage(response.data);
       console.log("Type de données", response.data);
-      console.log("Message", message);
+      console.log("Message", response);
       // if (response.status === 200) {
       //   setMessage("🎉 Livre supprimé avec succès!");
       // } else {
       //   setMessage(response.data);
       // }
-    } catch (res) {
-      setMessage(res.data);
-      return res.data;
+    } catch (error) {
+      setMessage(error.response.data);
+      //return error.response.data;
     }
   }
 
@@ -95,6 +95,7 @@ function DeleteBook() {
                   </Card.Body>
                 </Card>
               </Row>
+
               <Row>
                 <h1 class="font-weigh-light">Supprimer un livre</h1>
                 <Form onSubmit={submitDeleteBook}>

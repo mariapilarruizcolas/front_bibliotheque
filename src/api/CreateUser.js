@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import NavigationBarre from "../components/NavigationBarre";
@@ -22,11 +22,11 @@ function Register(credentials) {
   const [admin, setAdmin] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleFirstNameChange(e) {
-    if (e.target.value.firstname === "") {
-      setMessage("");
-    }
-  }
+  // function handleFirstNameChange(e) {
+  //   if (e.target.value.firstname === "") {
+  //     setMessage("");
+  //   }
+  // }
   const handleReset = (e) => {
     setFirstname("");
     setLastname("");
@@ -56,8 +56,16 @@ function Register(credentials) {
         setMessage(res.data);
         console.log("Message", message);
       })
-
-      .catch((err) => setMessage(err.response.data));
+      .catch((err) => {
+        console.log("Agargur", err.response.data);
+        if (err.response.status === 422) {
+          setMessage(err.response.data);
+          //setMessage(validationErrors);
+        } else {
+          setMessage("Erreur pendant l'enregistrement de l'utilisateur");
+        }
+      });
+    // .catch((err) => setMessage(err.response.data));
     return message;
   };
   return (

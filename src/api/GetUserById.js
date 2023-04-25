@@ -14,7 +14,7 @@ function GetUserById() {
   const { firstname } = useContext(UserContext);
   const [userId, setUserId] = useState("");
   const [data, setData] = useState("");
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   function handleUserIdChange(e) {
     setUserId(Number(e.target.value));

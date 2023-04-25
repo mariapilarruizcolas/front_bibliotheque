@@ -1,18 +1,6 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import {
-  Button,
-  Form,
-  Nav,
-  Carousel,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Image,
-  Card,
-} from "react-bootstrap";
+import { Nav, Carousel, Row, Col } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 function News() {

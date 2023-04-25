@@ -1,45 +1,34 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import Logout from "./Logout";
+//import { NavLink } from "react-router-dom";
+//import Logout from "./Logout";
 import AuthContext from "../contexts/AuthContext";
-import "../styles/NavBar.css";
-import { useNavigate } from "react-router-dom";
+//import "../styles/NavBar.css";
+//import { useNavigate } from "react-router-dom";
 
-import {
-  Button,
-  Form,
-  Nav,
-  Navbar,
-  Carousel,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Image,
-  Card,
-} from "react-bootstrap";
+import { Nav, Navbar, Container } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-
+//TO DO
+//Inclure si on est connecte à la place de se connecter mettre Logout
 function NavigationBarre() {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   console.log("identifie", isAuthenticated);
-  const clickToLogIn = (e) => {
-    e.preventDefault();
-    navigate("./login", { replace: true });
-  };
-  const clickToRegister = (e) => {
-    e.preventDefault();
-    navigate("./register", { replace: true });
-  };
+  // const clickToLogIn = (e) => {
+  //   e.preventDefault();
+  //   navigate("./login", { replace: true });
+  // };
+  // const clickToRegister = (e) => {
+  //   e.preventDefault();
+  //   navigate("./register", { replace: true });
+  // };
 
-  const handleLogout = () => {
-    Logout();
-    setIsAuthenticated(false);
-    navigate("../login", { replace: true });
-  };
+  // const handleLogout = () => {
+  //   Logout();
+  //   setIsAuthenticated(false);
+  //   navigate("../login", { replace: true });
+  // };
 
   return (
     // <div className="containerNavigationBarre2">

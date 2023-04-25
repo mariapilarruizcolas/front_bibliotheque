@@ -8,19 +8,7 @@ import Infos from "../components/Infos";
 import Footer from "../components/Footer";
 import Alert from "../components/Alert";
 // import '../styles/test.css';
-import {
-  Button,
-  Form,
-  Nav,
-  NavBar,
-  Carousel,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Image,
-  Card,
-} from "react-bootstrap";
+import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -63,7 +51,7 @@ function Register(credentials) {
             <Col sm={8}>
               <Row>
                 {/* <form className="form-data2" onSubmit={submitPostUser}> */}
-                <Form onSubmit={submitPostUser}>
+                <Form onSubmit={submitPostUser} className="width-100">
                   {isAuthenticated ? (
                     <h1 class="font-weigh-light">
                       Créer un nouveau utilisateur
@@ -118,7 +106,11 @@ function Register(credentials) {
                     />
                   </Form.Group>
 
-                  <Button variant="primary" type="submit">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    className="d-flex justify-content-center"
+                  >
                     Envoyer
                   </Button>
                 </Form>
@@ -144,19 +136,6 @@ function Register(credentials) {
       <Footer />
     </>
   );
-}
-
-{
-  /* <div className="confirmation">
-                        <h2>{
-                            isAuthenticated ? 'Vous êtes authentifie' : 'Vous êtes pas authentifie'
-                        }</h2>
-                        <h2>Données recues</h2>
-                        <p>firstname:{firstname}</p>
-                        <p>lastname:{lastname}</p>
-
-                        <p>admin{admin}</p>
-                    </div> */
 }
 
 export default Register;

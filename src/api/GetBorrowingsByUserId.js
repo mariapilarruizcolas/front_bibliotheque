@@ -107,6 +107,24 @@ function GetBorrowingsByUserId() {
                   </Button>
                 </Form>
                 {data
+                  ? data.map((book) => {
+                      const formattedDate = new Date(
+                        book.deadlineDate
+                      ).toLocaleDateString("fr-FR");
+                      return (
+                        <Card className="my-3 width-500" key={book.title}>
+                          <Card.Body>
+                            <Card.Text>
+                              <p>Titre {book.title}</p>
+                              <p>Auteur {book.author}</p>
+                              <p>Date limite {formattedDate}</p>
+                            </Card.Text>
+                          </Card.Body>
+                        </Card>
+                      );
+                    })
+                  : null}
+                {/* {data
                   ? data.map((book) => (
                       <Card className="my-3 width-500">
                         <Card.Body>
@@ -118,7 +136,7 @@ function GetBorrowingsByUserId() {
                         </Card.Body>
                       </Card>
                     ))
-                  : null}
+                  : null} */}
 
                 {message ? (
                   <Card className="my-3 width-500">

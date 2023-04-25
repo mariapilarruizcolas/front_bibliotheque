@@ -1,27 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import NavigationBarre from "../components/NavigationBarre";
 import Infos from "../components/Infos";
-import Formu from "../components/Formu";
-import News from "../components/News";
 import Footer from "../components/Footer";
 import Alert from "../components/Alert";
 //import "../styles/test.css";
 //to do creer un context pour savoir le livre qui a été clické
 //et le recuperer apres sur l'emprunt
-import {
-  Button,
-  Form,
-  Nav,
-  NavBar,
-  Carousel,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Image,
-  Card,
-} from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 

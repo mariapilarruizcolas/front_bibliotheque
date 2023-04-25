@@ -9,19 +9,7 @@ import Alert from "../components/Alert";
 //import "../styles/test.css";
 //to do creer un context pour savoir le livre qui a été clické
 //et le recuperer apres sur l'emprunt
-import {
-  Button,
-  Form,
-  Nav,
-  NavBar,
-  Carousel,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Image,
-  Card,
-} from "react-bootstrap";
+import { Button, Container, Row, Col } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -52,7 +40,7 @@ function Home() {
             <Col sm={8}>
               <Formu />
               <News />
-              <Row className=" my-5">
+              <Row className=" my-3">
                 <div className="buttonsBorrowing">
                   <Button
                     variant="outline-info"
@@ -77,8 +65,8 @@ function Home() {
           </Row>
           <Row></Row>
 
-          <Row className="margin-bottom-2">
-            <Alert />
+          <Row>
+            <Alert className="justify-content-center" />
           </Row>
         </Container>
       </main>

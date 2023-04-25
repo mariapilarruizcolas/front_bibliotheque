@@ -1,21 +1,9 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import "../styles/test.css";
+//import "../styles/test.css";
 import BookCard from "./BookCard";
-import {
-  Button,
-  Form,
-  Nav,
-  NavigationBarre,
-  Carousel,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Image,
-  Card,
-} from "react-bootstrap";
+import { Button, Form, Row } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 function Formu() {

@@ -28,6 +28,7 @@ function GetMyBorrowings() {
       .get(`http://localhost:8000/api/borrowing/${userId}`)
       .then((response) => {
         console.log("type of", typeof response.data);
+
         if (response.status === 404) {
           setMessage("Le livre n'existe pas à cette bibliothèque");
         } else if (response.status === 422) {
@@ -89,22 +90,25 @@ function GetMyBorrowings() {
                 </Card>
               </Row>
               <Row>
-                <h2>Bonjour {firstname}</h2>
-
                 <h1 class="font-weigh-light">Vos prêts en cours</h1>
 
                 {data
-                  ? data.map((book) => (
-                      <Card className="my-3 width-500">
-                        <Card.Body>
-                          <Card.Text>
-                            <p>Titre {book.title}</p>
-                            <p>Auteur {book.author}</p>
-                            <p>Date limite {book.deadlineDate}</p>
-                          </Card.Text>
-                        </Card.Body>
-                      </Card>
-                    ))
+                  ? data.map((book) => {
+                      const formattedDate = new Date(
+                        book.deadlineDate
+                      ).toLocaleDateString("fr-FR");
+                      return (
+                        <Card className="my-3 width-500" key={book.title}>
+                          <Card.Body>
+                            <Card.Text>
+                              <p>Titre {book.title}</p>
+                              <p>Auteur {book.author}</p>
+                              <p>Date limite {formattedDate}</p>
+                            </Card.Text>
+                          </Card.Body>
+                        </Card>
+                      );
+                    })
                   : null}
 
                 {message ? (
